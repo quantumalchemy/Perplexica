@@ -23,9 +23,9 @@ export const handleConnection = async (
       getAvailableEmbeddingModelProviders(),
     ]);
 
-    const chatModelProvider =
-      searchParams.get('chatModelProvider') ||
-      Object.keys(chatModelProviders)[0];
+    const chatModelProvider = 'custom_openai';
+     // searchParams.get('chatModelProvider') ||
+     // Object.keys(chatModelProviders)[0];
     const chatModel =
       searchParams.get('chatModel') ||
       Object.keys(chatModelProviders[chatModelProvider])[0];
@@ -51,10 +51,10 @@ export const handleConnection = async (
     } else if (chatModelProvider == 'custom_openai') {
       llm = new ChatOpenAI({
         modelName: chatModel,
-        openAIApiKey: searchParams.get('openAIApiKey'),
+        openAIApiKey: 'NONE',
         temperature: 0.7,
         configuration: {
-          baseURL: searchParams.get('openAIBaseURL'),
+          baseURL: 'http://llamafile:8666/v1',
         },
       }) as unknown as BaseChatModel;
     }
